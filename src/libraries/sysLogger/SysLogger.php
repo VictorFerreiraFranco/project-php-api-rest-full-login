@@ -3,6 +3,7 @@
 namespace Api\libraries\sysLogger;
 
 use Api\libraries\auth\AuthUser;
+use DateTime;
 use Monolog\Handler\StreamHandler;
 use Monolog\Level;
 use Monolog\Logger;
@@ -16,39 +17,18 @@ class SysLogger
     private static Logger $userDebug;
     
     private static Logger $queryLogger;
+    
+    private static string $path = PROJECT_ROOT . '/logs/';
 
+    private static DateTime $date;
+    
     /**
      * Inicializa as props de logs
      * @return void
      */
     public static function initialize(): void
     {
-        $date = new \DateTime();
-        $today = $date->format('Y_m_d');
-
-        self::$error = new Logger('error');
-        self::$error->pushHandler(new StreamHandler(
-            PROJECT_ROOT . "/logs/error_{$today}.log",
-            Level::Error
-        ));
-
-        self::$debug = new Logger('debug');
-        self::$debug->pushHandler(new StreamHandler(
-            PROJECT_ROOT . "/logs/debug_{$today}.log",
-            Level::Debug
-        ));
-        
-        self::$userDebug = new Logger('user_debug');
-        self::$userDebug->pushHandler(new StreamHandler(
-            PROJECT_ROOT . "/logs/user_debug_{$today}.log",
-            Level::Debug
-        ));
-        
-        self::$queryLogger = new Logger('debug');
-        self::$queryLogger->pushHandler(new StreamHandler(
-            PROJECT_ROOT . "/logs/query_logger_{$today}.log",
-            Level::Debug
-        ));
+        self::$date = new DateTime();
     }
 
     /**
@@ -57,6 +37,14 @@ class SysLogger
      */
     public static function error(): Logger
     {
+        if (!isset(self::$error)) {
+            self::$error = new Logger('error');
+            self::$error->pushHandler(new StreamHandler(
+                self::$path . "error_".self::$date->format('Y-m-d').".log",
+                Level::Error
+            ));
+        }
+        
         return self::$error;
     }
     
@@ -66,6 +54,14 @@ class SysLogger
      */
     public static function debug(): ?Logger
     {
+        if (DEBUG_MODE == 1 && !isset(self::$debug)) {
+            self::$debug = new Logger('debug');
+            self::$debug->pushHandler(new StreamHandler(
+                self::$path . "debug_".self::$date->format('Y-m-d').".log",
+                Level::Debug
+            ));
+        }
+        
         return DEBUG_MODE == 1 ? self::$debug : null;
     }
     
@@ -75,6 +71,14 @@ class SysLogger
      */
     public static function userDebug(): ?Logger
     {
+        if (AuthUser::isDebug() && !isset(self::$userDebug)) {
+            self::$userDebug = new Logger('user_debug');
+            self::$userDebug->pushHandler(new StreamHandler(
+                self::$path . "user_debug_".self::$date->format('Y-m-d').".log",
+                Level::Debug
+            ));
+        }
+        
         return AuthUser::isDebug() ? self::$userDebug : null;
     }
     
@@ -84,6 +88,14 @@ class SysLogger
      */
     public static function queryLogger(): Logger
     {
+        if (!isset(self::$queryLogger)) {
+            self::$queryLogger = new Logger('query_logger');
+            self::$queryLogger->pushHandler(new StreamHandler(
+                self::$path . "query_logger_".self::$date->format('Y-m-d').".log",
+                Level::Debug
+            ));
+        }
+        
         return self::$queryLogger;
     }
 }

@@ -18,9 +18,10 @@ try {
     define('BASE_URI', rtrim(dirname($_SERVER['SCRIPT_NAME']), '/'));
     
     require_once PROJECT_ROOT . '/vendor/autoload.php';
-    require_once PROJECT_ROOT . '/src/config/constants.php';
     
     SysLogger::initialize();
+    
+    require_once PROJECT_ROOT . '/src/config/constants.php';
     
     SysLogger::debug()?->debug('Initializing execution');
     

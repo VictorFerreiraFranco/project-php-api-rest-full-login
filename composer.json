@@ -2,10 +2,10 @@
   "name": "victor/project-api-rest-login",
   "description": "API para integração com sistema interno",
   "type": "project",
+  "version": "1.0.1",
   "license": "MIT",
   "minimum-stability": "stable",
   "prefer-stable": true,
-
   "autoload": {
     "psr-4": {
       "Api\\": "src/"

@@ -15,7 +15,7 @@ class SendSuccess implements IMessages
     
     public function getStatus(): Status
     {
-        return Status::NO_CONTENT;
+        return Status::SUCCESS;
     }
     
     public function getMessages(): null|string

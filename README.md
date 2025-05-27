@@ -5,9 +5,10 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/PHP-8.1-blue" alt="PHP Version" />
-  <img src="https://img.shields.io/badge/Status-Em%20desenvolvimento-yellow" alt="Status" />
-  <img src="https://img.shields.io/badge/Licença-MIT-green" alt="Licença" />
+  <img src="https://img.shields.io/badge/PHP-8.1+-blue" alt="PHP Version" />
+  <img src="https://img.shields.io/badge/Status-Em%20produção-green" alt="Status" />
+  <img src="https://img.shields.io/badge/Licença-MIT-yellow" alt="Licença" />
+  <img src="https://img.shields.io/badge/versão-1.0.1-brown" alt="Licença" />
 </p>
 
 ---
@@ -18,7 +19,7 @@
 * [🧰 Tecnologias Utilizadas](#-tecnologias-utilizadas)
 * [📦 Instalação](#-instalação)
 * [📊 Configuração de Banco de Dados](#-configuração-de-banco-de-dados)
-* [▶️ Execução](#-execução)
+* ▶️ [Execução](#-execução)
 * [📂 Estrutura de Pastas](#-estrutura-de-pastas)
 * [⚖️ Como Usar](#-como-usar)
 * [🧑‍💻 Autor](#-autor)
@@ -48,12 +49,12 @@ Este projeto é uma API RESTful desenvolvida com foco em simplicidade, organiza�
 
 ###### Clone o repositório
 ```bash
-git clone https://github.com/VictorFerreiraFranco/project-php-api-rest-login.git
+git clone https://github.com/VictorFerreiraFranco/project-php-api-rest-full-login.git
 ```
 
 ###### Acesse o diretório
 ```bash
-cd 'project-php-api-rest-login'
+cd 'project-php-api-rest-full-login'
 ```
 
 ###### Instale as dependências
@@ -245,3 +246,6 @@ Centralize e gerenciar os logs do sistema utilizando a biblioteca **Monolog**. A
 **Victor Ferreira Franco**
 Desenvolvedor PHP
 2025
+
+`Copyright (c) 2025 Victor Ferreira Franco
+`
