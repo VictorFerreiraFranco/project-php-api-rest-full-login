@@ -90,7 +90,10 @@ class Router
                 if (is_callable($route['controller']))
                     call_user_func($route['controller']);
                 else
-                    call_user_func([new $route['controller'], $route['action']]);
+                {
+                    $action = !empty($route['action']) ? $route['action'] : strtolower(Request::getMethod());
+                    call_user_func([new $route['controller'], $action]);
+                }
                 
                 return;
             }

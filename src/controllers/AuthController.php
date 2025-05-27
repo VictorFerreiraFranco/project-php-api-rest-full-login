@@ -19,7 +19,7 @@ use Api\models\User\Status;
 use Api\providers\UserProvider;
 use Api\services\UserService;
 
-class AuthController
+class AuthController extends Controller
 {
     /**
      * Realiza o login do usuário
@@ -31,7 +31,7 @@ class AuthController
      * @return void
      * @throws ReponseException
      */
-    public static function login(): void
+    public static function post(): void
     {
         SysLogger::debug()?->debug('AuthController::login');
         
@@ -73,7 +73,7 @@ class AuthController
      * @return void
      * @throws ReponseException
      */
-    public static function me(): void
+    public static function get(): void
     {
         SysLogger::debug()?->debug('AuthController::me');
         

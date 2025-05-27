@@ -15,7 +15,7 @@ Router::map(
 );
 
 // Auth Routes
-Router::map(Method::POST, '/login', AuthController::class, 'login', ignoreMiddleware: [AuthorizationJwt::class]);
-Router::map(Method::GET, '/me', AuthController::class, 'me');
+Router::map(Method::POST, '/login', AuthController::class, ignoreMiddleware: [AuthorizationJwt::class]);
+Router::map(Method::GET, '/me', AuthController::class);
 Router::map(Method::PATCH, '/updatePassword', AuthController::class, 'updatePassword');
 
