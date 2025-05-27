@@ -1,0 +1,33 @@
+{
+  "name": "victor/project-api-rest-login",
+  "description": "API para integração com sistema interno",
+  "type": "project",
+  "license": "MIT",
+  "minimum-stability": "stable",
+  "prefer-stable": true,
+
+  "autoload": {
+    "psr-4": {
+      "Api\\": "src/"
+    },
+    "files": []
+  },
+
+  "require": {
+    "php": "^8.1",
+    "firebase/php-jwt": "^6.11",
+    "illuminate/database": "^10.48",
+    "illuminate/events": "^10.48",
+    "monolog/monolog": "^3.8",
+    "ramsey/collection": "^2.1",
+    "vlucas/phpdotenv": "^5.6"
+  },
+
+  "config": {
+    "optimize-autoloader": true,
+    "sort-packages": true
+  },
+  "require-dev": {
+    "barryvdh/laravel-ide-helper": "^3.1"
+  }
+}
