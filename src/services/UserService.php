@@ -4,6 +4,7 @@ namespace Api\services;
 
 use Api\helpers\PasswordHelper;
 use Api\libraries\sysLogger\SysLogger;
+use Api\libraries\translator\Translator;
 use Api\models\User\Status;
 use Api\models\User\User;
 use Exception;
@@ -35,7 +36,7 @@ class UserService
         $user->user_status_id = $user_status_id;
         
         if (!$user->save())
-            throw new Exception('Erro ao criar o usuário');
+            throw new Exception(Translator::get('auth.error.creating.user'));
     }
     
     /**
@@ -68,7 +69,7 @@ class UserService
             $user->user_status_id = $user_status_id;
         
         if (!$user->save())
-            throw new Exception('Erro ao atualizar o usuário');
+            throw new Exception(Translator::get('auth.error.updating.user'));
     }
     
     /**
@@ -90,15 +91,15 @@ class UserService
         $user = User::find($id);
         
         if (empty($user))
-            throw new Exception('Usuário não encontrado');
+            throw new Exception(Translator::get('auth.error.user.not.found'));
             
         if (!password_verify($oldPassword, $user->password))
-            throw new Exception('Senha informada inválida');
+            throw new Exception(Translator::get('validation.parameter.invalid', ['parameter' => Translator::get('parameter.password')]));
         
         $user->password = PasswordHelper::hash($newPassword);
         
         if (!$user->save())
-            throw new Exception('Erro ao atualizar a senha');
+            throw new Exception(Translator::get('auth.password.updated.successfully'));
     }
     
     /**
@@ -114,12 +115,12 @@ class UserService
         $user = User::find($id);
         
         if (empty($user))
-            throw new Exception('Usuário não encontrado');
+            throw new Exception(Translator::get('auth.error.user.not.found'));
         
         $user->user_status_id = Status::BLOCKED;
         
         if (!$user->save())
-            throw new Exception('Erro ao bloquear o usuário');
+            throw new Exception(Translator::get('auth.error.blocking.user'));
     }
     
     /**
@@ -135,11 +136,11 @@ class UserService
         $user = User::find($id);
         
         if (empty($user))
-            throw new Exception('Usuário não encontrado');
+            throw new Exception(Translator::get('auth.error.user.not.found'));
         
         $user->user_status_id = Status::DELETED;
         
         if (!$user->save())
-            throw new Exception('Erro ao deletar o usuário');
+            throw new Exception(Translator::get('auth.error.deleting.user'));
     }
 }

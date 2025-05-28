@@ -4,6 +4,8 @@ namespace Api\libraries\apiResponse\messages\auth;
 
 use Api\libraries\apiResponse\messages\IMessages;
 use Api\libraries\apiResponse\Status;
+use Api\libraries\translator\Translator;
+use Exception;
 
 class CredentialsDenied implements IMessages
 {
@@ -12,9 +14,13 @@ class CredentialsDenied implements IMessages
         return Status::VALIDATION_ERROR;
     }
     
+    /**
+     * @return string
+     * @throws Exception
+     */
     public function getMessages(): string
     {
-        return 'Usuário ou senha incorretos';
+        return Translator::get('auth.incorrect.username.password');
     }
     
     public function getData(): null|array

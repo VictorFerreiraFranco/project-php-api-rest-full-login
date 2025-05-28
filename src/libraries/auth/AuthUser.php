@@ -2,7 +2,6 @@
 
 namespace Api\libraries\auth;
 
-use Api\config\Database;
 use Api\libraries\sysLogger\SysLogger;
 use Api\models\User\User;
 

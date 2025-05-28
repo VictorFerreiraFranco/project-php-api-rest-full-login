@@ -15,6 +15,7 @@ use Api\libraries\auth\AuthUser;
 use Api\libraries\auth\JwtHandler;
 use Api\libraries\request\Request;
 use Api\libraries\sysLogger\SysLogger;
+use Api\libraries\translator\Translator;
 use Api\models\User\Status;
 use Api\providers\UserProvider;
 use Api\services\UserService;
@@ -30,16 +31,17 @@ class AuthController extends Controller
      *
      * @return void
      * @throws ReponseException
+     * @throws \Exception
      */
     public static function post(): void
     {
-        SysLogger::debug()?->debug('AuthController::login');
+        SysLogger::debug()?->debug('AuthController::post');
         
         if (Request::empty('email'))
-            throw new ReponseException(new NotExistParameters('email'));
+            throw new ReponseException(new NotExistParameters(Translator::get('parameter.email')));
         
         if (Request::empty('password'))
-            throw new ReponseException(new NotExistParameters('password'));
+            throw new ReponseException(new NotExistParameters(Translator::get('parameter.password')));
         
         $user = UserProvider::findByEmail((string) Request::get('email'));
         
@@ -59,7 +61,7 @@ class AuthController extends Controller
 
         AuthUser::start($user->id);
         
-        SysLogger::userDebug()?->debug('Login realizado com sucesso!', [
+        SysLogger::userDebug()?->debug('Login successfully', [
             'id' => $user->id,
             'email' => $user->email,
             'token' => $token,
@@ -75,7 +77,7 @@ class AuthController extends Controller
      */
     public static function get(): void
     {
-        SysLogger::debug()?->debug('AuthController::me');
+        SysLogger::debug()?->debug('AuthController::get');
         
         throw new ReponseException(new SendSuccessData([
             'name' => AuthUser::getUser()?->name,
@@ -92,16 +94,17 @@ class AuthController extends Controller
      *
      * @return void
      * @throws ReponseException
+     * @throws \Exception
      */
     public static function updatePassword(): void
     {
         SysLogger::debug()?->debug('AuthController::updatePassword');
         
         if (Request::empty('old_password'))
-            throw new ReponseException(new NotExistParameters('old_password'));
+            throw new ReponseException(new NotExistParameters(Translator::get('parameter.old_password')));
         
         if (Request::empty('new_password'))
-            throw new ReponseException(new NotExistParameters('new_password'));
+            throw new ReponseException(new NotExistParameters(Translator::get('parameter.new_password')));
         
         try {
             UserService::updatePassword(
@@ -110,9 +113,9 @@ class AuthController extends Controller
                 (string) Request::get('new_password')
             );
         } catch (\Exception $e) {
-            throw new ReponseException(new OperationError('Atualizar Senha', $e));
+            throw new ReponseException(new OperationError(Translator::get('auth.operation.update.password'), $e));
         }
         
-        throw new ReponseException(new SendSuccess('Senha atualizada com sucesso!'));
+        throw new ReponseException(new SendSuccess(Translator::get('auth.password.updated.successfully')));
     }
 }

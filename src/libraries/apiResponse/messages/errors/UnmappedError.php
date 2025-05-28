@@ -5,6 +5,8 @@ namespace Api\libraries\apiResponse\messages\errors;
 use Api\libraries\apiResponse\messages\IMessages;
 use Api\libraries\apiResponse\Status;
 use Api\libraries\sysLogger\SysLogger;
+use Api\libraries\translator\Translator;
+use Exception;
 use Throwable;
 
 class UnmappedError implements IMessages
@@ -23,10 +25,14 @@ class UnmappedError implements IMessages
     {
         return Status::INTERNAL_ERROR;
     }
-
+    
+    /**
+     * @return string
+     * @throws Exception
+     */
     public function getMessages(): string
     {
-        return 'Erro interno e não mapeado do servidor!';
+        return Translator::get('error.internal.unmapped');
     }
 
     public function getData(): null|array

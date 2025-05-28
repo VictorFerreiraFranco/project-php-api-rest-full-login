@@ -6,7 +6,6 @@ use Api\libraries\apiResponse\Status;
 
 class SendSuccessData extends SendSuccess
 {
-    
     private ?array $data = null;
     
     public function __construct(array $data, ?string $mensage = null)

@@ -4,6 +4,8 @@ namespace Api\libraries\apiResponse\messages\errors\jwt;
 
 use Api\libraries\apiResponse\messages\IMessages;
 use Api\libraries\apiResponse\Status;
+use Api\libraries\translator\Translator;
+use Exception;
 
 class InvalidTokenError implements IMessages
 {
@@ -12,9 +14,13 @@ class InvalidTokenError implements IMessages
         return Status::UNAUTHORIZED;
     }
     
+    /**
+     * @return string
+     * @throws Exception
+     */
     public function getMessages(): string
     {
-        return 'Token inválido!';
+        return Translator::get('error.jwt.invalid.token');
     }
     
     public function getData(): null|array

@@ -4,6 +4,8 @@ namespace Api\libraries\apiResponse\messages\auth;
 
 use Api\libraries\apiResponse\messages\IMessages;
 use Api\libraries\apiResponse\Status;
+use Api\libraries\translator\Translator;
+use Exception;
 
 class BlockedAccess implements IMessages
 {
@@ -12,9 +14,13 @@ class BlockedAccess implements IMessages
         return Status::VALIDATION_ERROR;
     }
     
+    /**
+     * @return string
+     * @throws Exception
+     */
     public function getMessages(): string
     {
-        return 'Usuário bloqueado.';
+        return Translator::get('auth.user.blocked');
     }
     
     public function getData(): null|array

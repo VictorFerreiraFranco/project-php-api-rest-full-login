@@ -4,6 +4,8 @@ namespace Api\libraries\apiResponse\messages\auth;
 
 use Api\libraries\apiResponse\messages\IMessages;
 use Api\libraries\apiResponse\Status;
+use Api\libraries\translator\Translator;
+use Exception;
 
 class InactiveUser implements IMessages
 {
@@ -12,9 +14,13 @@ class InactiveUser implements IMessages
         return Status::VALIDATION_ERROR;
     }
     
+    /**
+     * @return string
+     * @throws Exception
+     */
     public function getMessages(): string
     {
-        return 'Usuário inativo.';
+        return Translator::get('auth.user.inactive');
     }
     
     public function getData(): null|array
