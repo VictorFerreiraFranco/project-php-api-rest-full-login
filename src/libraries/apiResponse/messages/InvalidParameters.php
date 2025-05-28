@@ -3,6 +3,8 @@
 namespace Api\libraries\apiResponse\messages;
 
 use Api\libraries\apiResponse\Status;
+use Api\libraries\translator\Translator;
+use Exception;
 
 class InvalidParameters implements IMessages
 {
@@ -18,9 +20,13 @@ class InvalidParameters implements IMessages
         return Status::VALIDATION_ERROR;
     }
     
+    /**
+     * @return string
+     * @throws Exception
+     */
     public function getMessages(): string
     {
-        return "O parâmetro {$this->parameter} é inválido.";
+        return Translator::get('validation.parameter.invalid', ['parameter' => $this->parameter]);
     }
     
     public function getData(): null|array

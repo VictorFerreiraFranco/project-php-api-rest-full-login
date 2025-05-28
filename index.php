@@ -10,6 +10,8 @@ use Api\libraries\router\middlewares\AuthorizationJwt;
 use Api\libraries\router\middlewares\ShutDownSystem;
 use Api\libraries\router\Router;
 use Api\libraries\sysLogger\SysLogger;
+use Api\libraries\translator\Lang;
+use Api\libraries\translator\Translator;
 
 session_start();
 
@@ -22,6 +24,8 @@ try {
     SysLogger::initialize();
     
     require_once PROJECT_ROOT . '/src/config/constants.php';
+    
+    Translator::initialize(Lang::fromString(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? DEFAULT_LANGUAGE, 0, 2)));
     
     SysLogger::debug()?->debug('Initializing execution');
     

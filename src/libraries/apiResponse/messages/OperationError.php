@@ -4,6 +4,8 @@ namespace Api\libraries\apiResponse\messages;
 
 use Api\libraries\apiResponse\Status;
 use Api\libraries\sysLogger\SysLogger;
+use Api\libraries\translator\Translator;
+use Exception;
 use Throwable;
 
 class OperationError implements IMessages
@@ -23,9 +25,13 @@ class OperationError implements IMessages
         return Status::VALIDATION_ERROR;
     }
     
+    /**
+     * @return string
+     * @throws Exception
+     */
     public function getMessages(): string
     {
-        return "Erro ao realizar a operação {$this->operation}.";
+        return Translator::get('system.error.performing.operatio', ['operation' => $this->operation]);
     }
     
     public function getData(): null|array

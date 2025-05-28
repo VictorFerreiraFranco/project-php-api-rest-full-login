@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/PHP-8.1+-blue" alt="PHP Version" />
   <img src="https://img.shields.io/badge/Status-Em%20produção-green" alt="Status" />
   <img src="https://img.shields.io/badge/Licença-MIT-yellow" alt="Licença" />
-  <img src="https://img.shields.io/badge/versão-1.1.0-brown" alt="Licença" />
+  <img src="https://img.shields.io/badge/versão-1.2.0-brown" alt="Licença" />
 </p>
 
 ---
@@ -207,37 +207,43 @@ class SendSuccess implements IMessages
 
 ---
 
-### 6. Models
+### 6. Logger
+
+Centralize e gerenciar os logs do sistema utilizando a biblioteca **Monolog**. Através da classe `SysLogger`
+> Veja [SysLogger.md](documents/libraries/sysLogger/sysLogger.md)
+
+---
+
+### 7. Translator
+A classe `Translator` permite a tradução de mensagens, facilitando a internacionalização da aplicação. As traduções são armazenadas em arquivos PHP dentro da pasta `src/lang`.
+> Veja [Translator.md](documents/libraries/translator/Translator.md)
+
+---
+
+### 8. Models
 
 Armazene modelos Eloquent na pasta `src/models`
 
 ---
 
-### 7. Controllers
+### 9. Controllers
 
 Local onde são tratadas as requisições. Delegam para os serviços correspondentes.
 <br><br>Pasta: `src/controllers`
 
 ---
 
-### 8. Services
+### 10. Services
 
 Organiza as classes que contêm as regras de negócio e lógicas específicas. Separadas por modelo.
 <br><br>Pasta: `src/services`
 
 ---
 
-### 9. Providers
+### 11. Providers
 
 Armazena classes auxiliares que provêm dados filtrados ou lógicas de apoio recorrentes.
 <br><br>Pasta: `src/providers`
-
----
-
-### 10. Logger
-
-Centralize e gerenciar os logs do sistema utilizando a biblioteca **Monolog**. Através da classe `SysLogger`
-> Veja [SysLogger.md](documents/libraries/sysLogger/sysLogger.md)
 
 ---
 

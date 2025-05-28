@@ -2,13 +2,14 @@
 
 namespace Api\libraries\router;
 
-use Api\config\Database;
 use Api\exceptions\ReponseException;
 use Api\libraries\apiResponse\messages\errors\NotFoundError;
 use Api\libraries\auth\AuthUser;
 use Api\libraries\request\Request;
 use Api\libraries\router\middlewares\IMiddleware;
 use Api\libraries\sysLogger\SysLogger;
+use Api\libraries\translator\Lang;
+use Api\libraries\translator\Translator;
 
 class Router
 {
@@ -87,6 +88,9 @@ class Router
                 foreach ($params as $key => $value)
                     Request::set($key, $value);
                 
+                if (!Request::empty('lang'))
+                    Translator::initialize(Lang::fromString(Request::get('lang')));
+                
                 if (is_callable($route['controller']))
                     call_user_func($route['controller']);
                 else
@@ -116,7 +120,6 @@ class Router
                 'i' => '(?P<' . $name . '>\d+)',
                 'a' => '(?P<' . $name . '>[a-zA-Z0-9_-]+)',
                 'h' => '(?P<' . $name . '>[a-fA-F0-9]+)',
-                '*' => '(?P<' . $name . '>[^/]+)',
                 '**' => '(?P<' . $name . '>.+)',
                 default => '(?P<' . $name . '>[^/]+)'
             };

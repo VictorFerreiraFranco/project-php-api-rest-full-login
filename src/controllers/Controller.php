@@ -53,7 +53,7 @@ abstract class Controller
     }
     
     /**
-     * Método para lidar com requisições OPTIONS
+     * Lidar com requisições OPTIONS
      * @throws ReponseException
      */
     public static function options()
@@ -62,7 +62,7 @@ abstract class Controller
     }
     
     /**
-     * Método para lidar com requisições HEAD
+     * Lidar com requisições HEAD
      * @throws ReponseException
      */
     public static function head()

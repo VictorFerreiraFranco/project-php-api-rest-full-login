@@ -3,6 +3,7 @@
 namespace Api\libraries\apiResponse\messages;
 
 use Api\libraries\apiResponse\Status;
+use Api\libraries\translator\Translator;
 
 class NotExistParameters implements IMessages
 {
@@ -20,7 +21,7 @@ class NotExistParameters implements IMessages
     
     public function getMessages(): string
     {
-        return "O parâmetro {$this->parameter} não foi encontrado.";
+        return Translator::get('validation.parameter.not.found', ['parameter' => $this->parameter]);
     }
     
     public function getData(): null|array
