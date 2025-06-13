@@ -2,6 +2,7 @@
 
 namespace Api\libraries\router;
 
+use Api\config\Config;
 use Api\exceptions\ReponseException;
 use Api\libraries\apiResponse\messages\errors\NotFoundError;
 use Api\libraries\auth\AuthUser;
@@ -65,7 +66,7 @@ class Router
      */
     public static function dispatch(): void {
         
-        $uri = '/' . ltrim(str_replace(BASE_URI, '', Request::getUri()), '/');
+        $uri = '/' . ltrim(str_replace(Config::get('BASE_URI'), '', Request::getUri()), '/');
         
         foreach (self::$routes as $route) {
             

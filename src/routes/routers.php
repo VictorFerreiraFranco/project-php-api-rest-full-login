@@ -1,6 +1,7 @@
 <?php
 
 use Api\controllers\AuthController;
+use Api\controllers\UserController;
 use Api\exceptions\ReponseException;
 use Api\libraries\apiResponse\messages\SendSuccess;
 use Api\libraries\router\Method;
@@ -16,10 +17,14 @@ Router::map(
     ignoreMiddleware: [AuthorizationJwt::class]
 );
 
-// Auth Routes
-Router::map(Method::POST, '/login', AuthController::class, ignoreMiddleware: [AuthorizationJwt::class]);
-Router::map(Method::GET, '/me', AuthController::class);
-Router::map(Method::PATCH, '/updatePassword', AuthController::class, 'updatePassword');
+// Autenticação
+Router::map(Method::POST, '/[a:lang]/auth/login', AuthController::class, ignoreMiddleware: [AuthorizationJwt::class]);
+Router::map(Method::GET,  '/[a:lang]/auth/me',    AuthController::class);
 
-// Exemplo de rota com parâmetro dinâmico e com definição de idioma
-Router::map(Method::POST, '/[a:lang]/login', AuthController::class, ignoreMiddleware: [AuthorizationJwt::class]);
+// Usuário (perfil)
+Router::map(Method::POST, '/[a:lang]/users', UserController::class);
+Router::map(Method::PUT, '/[a:lang]/users/profile',  UserController::class);
+Router::map(Method::PATCH, '/[a:lang]/users/password', UserController::class);
+Router::map(Method::DELETE, '/[a:lang]/users/[i:id]', UserController::class);
+Router::map(Method::PATCH, '/[a:lang]/users/[i:id]/block', UserController::class, 'block');
+Router::map(Method::PATCH, '/[a:lang]/users/[i:id]/activate', UserController::class, 'activate');

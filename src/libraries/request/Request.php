@@ -23,8 +23,19 @@ class Request
         SysLogger::debug()?->debug('Initializing request');
         
         self::$method = $_SERVER['REQUEST_METHOD'];
-        self::$headers = getallheaders() ?: [];
+        
+        if (function_exists('getallheaders'))
+            self::$headers = getallheaders() ?: [];
+        else
+            self::$headers = [];
+        
         self::$body = $_REQUEST;
+        
+        $content = json_decode(file_get_contents('php://input'), true);
+        
+        if (!empty($content))
+            self::$body = array_merge(self::$body, $content);
+        
         self::$uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         
         SysLogger::debug()?->debug('Request', self::toArray());

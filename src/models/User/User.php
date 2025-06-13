@@ -28,7 +28,7 @@ class User extends Model
      */
     public function status(): BelongsTo
     {
-        return $this->belongsTo(Status::class);
+        return $this->belongsTo(Status::class, 'user_status_id');
     }
     
     /**

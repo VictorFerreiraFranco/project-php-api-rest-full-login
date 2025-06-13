@@ -26,11 +26,11 @@ class Database
         
         self::$manager->addConnection([
             'driver' => 'mysql',
-            'host' => DB_HOST,
-            'database' => DB_DATABASE,
-            'username' => DB_USERNAME,
-            'password' => DB_PASSWORD,
-            'port'      => DB_PORT,
+            'host' => Config::get('DB_HOST'),
+            'database' => Config::get('DB_DATABASE'),
+            'username' => Config::get('DB_USERNAME'),
+            'password' => Config::get('DB_PASSWORD'),
+            'port'      => Config::get('DB_PORT'),
             'charset' => 'utf8',
             'collation' => 'utf8_unicode_ci',
             'prefix' => '',
@@ -41,7 +41,7 @@ class Database
         self::$manager->setAsGlobal();
         self::$manager->bootEloquent();
         
-        if (DEBUG_MODE == 1)
+        if (Config::get('DEBUG_MODE') == 1)
             self::$manager->getConnection()->listen(function ($query) {
                 SysLogger::queryLogger()->debug(
                     '[SQL] ' . $query->sql . ' [Bindings] ' . implode(', ', $query->bindings)

@@ -10,13 +10,13 @@ use Throwable;
 
 class OperationError implements IMessages
 {
-    private string $operation;
+    private string $message;
     
     private ?Throwable $throwable;
     
-    public function __construct(string $operation, ?Throwable $throwable = null)
+    public function __construct(string $message, ?Throwable $throwable = null)
     {
-        $this->operation = $operation;
+        $this->message = $message;
         $this->throwable = $throwable;
     }
     
@@ -31,7 +31,7 @@ class OperationError implements IMessages
      */
     public function getMessages(): string
     {
-        return Translator::get('system.error.performing.operatio', ['operation' => $this->operation]);
+        return $this->message;
     }
     
     public function getData(): null|array

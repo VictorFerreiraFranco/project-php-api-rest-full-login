@@ -1,5 +1,6 @@
 <?php
 
+use Api\config\Config;
 use Api\config\Database;
 use Api\exceptions\ReponseException;
 use Api\libraries\apiResponse\ApiResponse;
@@ -16,16 +17,13 @@ use Api\libraries\translator\Translator;
 session_start();
 
 try {
-    define('PROJECT_ROOT', __DIR__);
-    define('BASE_URI', rtrim(dirname($_SERVER['SCRIPT_NAME']), '/'));
+    require_once __DIR__ . '/vendor/autoload.php';
     
-    require_once PROJECT_ROOT . '/vendor/autoload.php';
+    Config::initialize( __DIR__);
     
     SysLogger::initialize();
     
-    require_once PROJECT_ROOT . '/src/config/constants.php';
-    
-    Translator::initialize(Lang::fromString(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? DEFAULT_LANGUAGE, 0, 2)));
+    Translator::initialize(Lang::fromString(substr($_SERVER['HTTP_ACCEPT_LANGUAGE'] ?? Config::get('DEFAULT_LANGUAGE'), 0, 2)));
     
     SysLogger::debug()?->debug('Initializing execution');
     
@@ -38,7 +36,7 @@ try {
         AuthorizationJwt::class
     ]);
     
-    require_once PROJECT_ROOT . '/src/routes/routers.php';
+    require_once Config::get('PROJECT_ROOT') . '/src/routes/routers.php';
     
     Router::dispatch();
     

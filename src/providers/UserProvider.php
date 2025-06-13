@@ -9,12 +9,17 @@ class UserProvider
     /**
      * Retorna o usuário pelo Email
      * @param string $email
+     * @param int|null $ignoreId
      * @return User|null
      */
-    public static function findByEmail(string $email): ?User
+    public static function findByEmail(string $email, ?int $ignoreId = null): ?User
     {
-        return User::where('email', $email)
-                ->first();
+        $user = User::where('email', $email);
+        
+        if (!empty($ignoreId))
+            $user->where('id', '!=', $ignoreId);
+        
+        return $user->first();
     }
     
 }

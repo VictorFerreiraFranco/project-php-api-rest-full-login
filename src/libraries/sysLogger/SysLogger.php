@@ -2,6 +2,7 @@
 
 namespace Api\libraries\sysLogger;
 
+use Api\config\Config;
 use Api\libraries\auth\AuthUser;
 use DateTime;
 use Monolog\Handler\StreamHandler;
@@ -18,7 +19,7 @@ class SysLogger
     
     private static Logger $queryLogger;
     
-    private static string $path = PROJECT_ROOT . '/logs/';
+    private static string $path;
 
     private static DateTime $date;
     
@@ -28,6 +29,7 @@ class SysLogger
      */
     public static function initialize(): void
     {
+        self::$path = Config::get('PROJECT_ROOT') . '/logs/';
         self::$date = new DateTime();
     }
 
@@ -54,7 +56,7 @@ class SysLogger
      */
     public static function debug(): ?Logger
     {
-        if (DEBUG_MODE == 1 && !isset(self::$debug)) {
+        if (Config::get('DEBUG_MODE') == 1 && !isset(self::$debug)) {
             self::$debug = new Logger('debug');
             self::$debug->pushHandler(new StreamHandler(
                 self::$path . "debug_".self::$date->format('Y-m-d').".log",
@@ -62,7 +64,7 @@ class SysLogger
             ));
         }
         
-        return DEBUG_MODE == 1 ? self::$debug : null;
+        return Config::get('DEBUG_MODE') == 1 ? self::$debug : null;
     }
     
     /**

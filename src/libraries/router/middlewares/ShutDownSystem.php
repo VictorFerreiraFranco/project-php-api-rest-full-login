@@ -2,6 +2,7 @@
 
 namespace Api\libraries\router\middlewares;
 
+use Api\config\Config;
 use Api\exceptions\ReponseException;
 use Api\libraries\apiResponse\messages\errors\ShutDownSystemError;
 use Api\libraries\sysLogger\SysLogger;
@@ -17,7 +18,7 @@ class ShutDownSystem implements IMiddleware
     {
         SysLogger::debug()?->debug('Checking shutdown system');
         
-        if (SHUTDOWN_MODE == 1)
+        if (Config::get('SHUTDOWN_MODE') == 1)
             throw new ReponseException(new ShutDownSystemError());
     }
     

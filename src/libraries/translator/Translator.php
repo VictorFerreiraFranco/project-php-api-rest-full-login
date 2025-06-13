@@ -2,6 +2,7 @@
 
 namespace Api\libraries\translator;
 
+use Api\config\Config;
 use Api\libraries\sysLogger\SysLogger;
 use Exception;
 
@@ -31,7 +32,7 @@ class Translator
         if (isset(self::$loadedDomains[$domain]))
             return;
         
-        $path = PROJECT_ROOT . "/src/langs/". self::$lang->get() ."/{$domain}.php";
+        $path = Config::get('PROJECT_ROOT') . "/src/langs/". self::$lang->get() ."/{$domain}.php";
         
         if (file_exists($path)) {
             self::$messages[$domain] = include $path;

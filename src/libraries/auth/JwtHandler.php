@@ -2,6 +2,7 @@
 
 namespace Api\libraries\auth;
 
+use Api\config\Config;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use stdClass;
@@ -46,6 +47,6 @@ class JwtHandler
      */
     private static function getSecretKey(): string
     {
-        return JWT_SECRET;
+        return Config::get('JWT_SECRET');
     }
 }

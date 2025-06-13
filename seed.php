@@ -1,11 +1,15 @@
 <?php
 
-const PROJECT_ROOT = __DIR__;
-require 'vendor/autoload.php';
-require 'src/config/constants.php';
-require 'src/config/database.php';
+use Api\config\Config;
+use Api\config\Database;
 
-foreach (glob(__DIR__ . '/src/database/seeders/*.php') as $file) {
+require __DIR__. '/vendor/autoload.php';
+
+Config::initialize(__DIR__);
+
+Database::initialize();
+
+foreach (glob(Config::get('PROJECT_ROOT') . '/src/database/seeders/*.php') as $file) {
     require $file;
 }
 
