@@ -8,7 +8,7 @@
   <img src="https://img.shields.io/badge/PHP-8.1+-blue" alt="PHP Version" />
   <img src="https://img.shields.io/badge/Status-Em%20produção-green" alt="Status" />
   <img src="https://img.shields.io/badge/Licença-MIT-yellow" alt="Licença" />
-  <img src="https://img.shields.io/badge/versão-1.3.0-brown" alt="Licença" />
+  <img src="https://img.shields.io/badge/versão-1.3.1-brown" alt="Licença" />
 </p>
 
 ---3

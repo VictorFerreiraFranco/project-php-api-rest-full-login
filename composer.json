@@ -2,7 +2,7 @@
   "name": "victor/project-api-rest-login",
   "description": "API para integração com sistema interno",
   "type": "project",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "license": "MIT",
   "minimum-stability": "stable",
   "prefer-stable": true,
