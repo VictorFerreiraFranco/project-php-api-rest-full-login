@@ -16,6 +16,10 @@ use Api\libraries\translator\Translator;
 
 session_start();
 
+set_exception_handler(function (Throwable $e) {
+    ApiResponse::send(new UnmappedError($e));
+});
+
 try {
     require_once __DIR__ . '/vendor/autoload.php';
     
@@ -43,9 +47,10 @@ try {
     throw new ReponseException(new SendSuccess());
 
 } catch (ReponseException $e) {
-    SysLogger::debug()?->debug('End execution');
     ApiResponse::send($e->getMenssageResponse());
 } catch (Throwable $e) {
     ApiResponse::send(new UnmappedError($e));
+} finally {
+    SysLogger::debug()?->debug('End execution');
 }
 
