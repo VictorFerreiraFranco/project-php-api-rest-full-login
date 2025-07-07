@@ -11,7 +11,7 @@
   <img src="https://img.shields.io/badge/versão-1.3.1-brown" alt="Licença" />
 </p>
 
----3
+---
 
 ## 📁 Sumário
 
@@ -250,8 +250,3 @@ Armazena classes auxiliares que provêm dados filtrados ou lógicas de apoio rec
 ## 🧑‍💻 Autor
 
 **Victor Ferreira Franco**
-Desenvolvedor PHP
-2025
-
-`Copyright (c) 2025 Victor Ferreira Franco
-`
